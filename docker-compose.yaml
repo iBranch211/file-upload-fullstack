@@ -1,0 +1,36 @@
+version: "3"
+services:
+  backend:
+    build: ./spring-boot-upload-files
+    container_name: backend
+    restart: ${RESTART_POLICY}
+    environment:
+      - TZ
+      - MAX_FILE_SIZE
+      - SERVER_PORT
+      - FILE_UPLOAD_DIR
+      - API_BASE_PATH
+    ports:
+      - 9090:${SERVER_PORT}
+    volumes:
+      - ./spring-boot-upload-files/uploads:${FILE_UPLOAD_DIR}:Z
+
+  frontend:
+    build: ./react-hooks-file-upload
+    container_name: frontend
+    restart: ${RESTART_POLICY}
+    ports:
+      - 9091:80
+
+  nginx:
+    image: nginx:1.15-alpine
+    container_name: nginx
+    restart: ${RESTART_POLICY}
+    links:
+      - backend
+      - frontend
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:Z
+    ports:
+      - 80:80
