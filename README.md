@@ -20,6 +20,12 @@ Swagger Url : http://localhost/api/documentation/swagger-ui/
 
 <img src="https://github.com/susimsek/file-upload-fullstack/blob/master/images/swagger.png" alt="Spring Boot Swagger" width="50%" height="50%"/>
 
+### App
+
+App Url : http://localhost
+
+<img src="https://github.com/susimsek/file-upload-fullstack/blob/master/images/app.png" alt="Spring Boot React App" width="50%" height="50%"/>
+
 
 ## Used Technologies
 
